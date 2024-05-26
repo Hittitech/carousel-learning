@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel with Sections and Loader</title>
+    <!-- <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #ffffff;
+      }
+      .carousel-container {
+        width: 90%;
+        height: 60vh;
+        margin-bottom: 20px;
+        background: url(images/bg-img.jpg) center/cover no-repeat;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .carousel-item {
+        display: flex;
+        min-width: 100%;
+        text-align: left;
+      }
+      .carousel-text {
+        flex: 60%;
+        padding: 60px;
+        text-wrap: wrap;
+      }
+      .carousel-text h1 {
+        margin-top: 0;
+      }
+      .carousel-image {
+        flex: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .carousel-image img {
+        max-width: 70%;
+        max-height: 90%;
+      }
+      .sections {
+        display: flex;
+        width: 80%;
+        justify-content: space-between;
+      }
+      .section {
+        width: 23%;
+        text-align: center;
+        cursor: pointer;
+      }
+      .loader {
+        width: 100%;
+        height: 5px;
+        background: #ddd;
+        overflow: hidden;
+        position: relative;
+        margin-top: 10px;
+        border-radius: 2.5px;
+      }
+      .loader::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        /* background: #ffffff; */
+        transition: width 3s linear;
+      }
+      .active .loader::before {
+        width: 100%;
+        background: #800080;
+
+      }
+      .section-text.active {
+        color: blue;
+        font-weight: bold;
+        transition: color 0.5s, font-weight 0.5s;
+      }
+    </style> -->
+
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+          }
+          .carousel-parent {
+            width: 100%;
+            height: 60vh;
+            margin-bottom: 20px;
+            background: url(images/bg-img.jpg) center/cover no-repeat;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+          }
+          .carousel-container {
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+          }
+          .carousel {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
+
+          }
+
+          .carousel-item {
+            display: flex;
+            min-width: 100%;
+            text-align: left;
+
+          }
+          .carousel-text {
+            flex: 60%;
+            padding: 60px 60px 60px 90px;
+            text-wrap: wrap;
+          }
+          .carousel-text h1 {
+            margin-top: 0;
+            color: rgb(255, 85, 12);
+
+          }
+          .carousel-image {
+            flex: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 20px;
+          }
+          .carousel-image img {
+            max-width: 70%;
+            max-height: 70%;
+          }
+          .sections {
+            display: flex;
+            width: 90%;
+            justify-content: space-between;
+          }
+          .section {
+            width: 23%;
+            text-align: center;
+            cursor: pointer;
+          }
+          .loader {
+            width: 100%;
+            height: 5px;
+            background: #ddd;
+            overflow: hidden;
+            position: relative;
+            margin-top: 10px;
+            border-radius: 2.5px;
+          }
+          .loader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            /* background: #ffffff; */
+            transition: width 3s linear;
+          }
+          .active .loader::before {
+            width: 100%;
+            background: #800080;
+          }
+          .section-text.active {
+            color: blue;
+            font-weight: bold;
+            transition: color 0.5s, font-weight 0.5s;
+          }
+          @media only screen and (max-width: 768px) {
+        .carousel-parent {
+          min-height: screen; /* Increase height to fit the entire screen */
+        }
+        .carousel {
+          /* Display carousel items in a column */
+        }
+        .carousel-item {
+            display: flex;
+            flex-direction: column;
+          /* min-height: calc(100vh - 120px); */
+           /* Adjust height to fit text and image */
+        }
+        .carousel-text {
+          padding: 20px; /* Reduce padding for smaller screens */
+        }
+        .carousel-image {
+          padding-bottom: 10px; /* Reduce padding for smaller screens */
+        }
+        .sections {
+          flex-direction: column;
+          align-items: center;
+          margin-top: 20px; /* Add margin to separate sections */
+        }
+        .section {
+          width: 90%; /* Take up almost the entire width */
+          margin-top: 20px; /* Add margin to separate sections */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carousel-parent">
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-item">
+            <div class="carousel-text">
+              <h1>Title 4</h1>
+              <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+              </p>
+              <button>Button 4</button>
+              <button>Button 4</button>
+            </div>
+            <div class="carousel-image">
+              <img
+                src="https://via.placeholder.com/400x400?text=Image+4"
+                alt="Image 4"
+              />
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-text">
+              <h1>Title 1</h1>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed
+                nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+                Sed nisi. Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus
+                diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
+              </p>
+              <button>Button 1</button>
+              <button>Button 1</button>
+            </div>
+            <div class="carousel-image">
+              <img src="images/1.webp" alt="Image 1" />
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-text">
+              <h1>Title 2</h1>
+              <p>
+                Sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat.
+              </p>
+              <button>Button 2</button>
+              <button>Button 2</button>
+            </div>
+            <div class="carousel-image">
+              <img src="images/2.webp" alt="Image 2" />
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-text">
+              <h1>Title 3</h1>
+              <p>
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur.
+              </p>
+              <button>Button 3</button>
+              <button>Button 3</button>
+            </div>
+            <div class="carousel-image">
+              <img src="images/3.webp" alt="Image 3" />
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-text">
+              <h1>Title 4</h1>
+              <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+              </p>
+              <button>Button 4</button>
+              <button>Button 4</button>
+            </div>
+            <div class="carousel-image">
+              <img src="images/4.webp" alt="Image 4" />
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-text">
+              <h1>Title 1</h1>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed
+                nisi. Nulla quis sem at nibh elementum imperdiet. Lorem ipsum
+                dolor sit amet, consectetur adipiscing elit. Integer nec odio.
+                Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
+                quis sem at nibh elementum imperdiet. Lorem ipsum dolor sit
+                amet, consectetur adipiscing elit. Integer nec odio. Praesent
+                libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem
+                at nibh elementum imperdiet.
+              </p>
+              <button>Button 1</button>
+              <button>Button 1</button>
+            </div>
+            <div class="carousel-image">
+              <img
+                src="https://via.placeholder.com/400x400?text=Image+1"
+                alt="Image 1"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sections">
+      <div class="section" id="section-1">
+        <p class="section-text">
+          Lorem ipsum dolor sit amet.Consectetur adipiscing elit
+        </p>
+        <div class="loader"></div>
+      </div>
+      <div class="section" id="section-2">
+        <p class="section-text">
+          Sed do eiusmod tempor.Consectetur adipiscing elit
+        </p>
+        <div class="loader"></div>
+      </div>
+      <div class="section" id="section-3">
+        <p class="section-text">
+          Ut enim ad minim veniam.Consectetur adipiscing elit
+        </p>
+        <div class="loader"></div>
+      </div>
+      <div class="section" id="section-4">
+        <p class="section-text">
+          Duis aute irure dolor.Consectetur adipiscing elit
+        </p>
+        <div class="loader"></div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const carousel = document.querySelector('.carousel');
+        const items = document.querySelectorAll('.carousel-item');
+        const sections = document.querySelectorAll('.section');
+        let currentIndex = 1;
+        let interval;
+
+        // Move to the initial slide (second one) immediately
+        carousel.style.transform = `translateX(-100%)`;
+
+        function updateCarousel(index) {
+          const offset = index * -100;
+          carousel.style.transition = 'transform 0.5s ease-in-out';
+          carousel.style.transform = `translateX(${offset}%)`;
+
+          sections.forEach((section, i) => {
+            const sectionTexts = section.querySelectorAll('.section-text');
+            if (i === (index - 1) % (items.length - 2)) {
+              section.classList.add('active');
+              sectionTexts.forEach(text => text.classList.add('active'));
+            } else {
+              section.classList.remove('active');
+              sectionTexts.forEach(text => text.classList.remove('active'));
+            }
+          });
+        }
+
+        function startAutoSlide() {
+          interval = setInterval(() => {
+            currentIndex++;
+            updateCarousel(currentIndex);
+            if (currentIndex === items.length - 1) {
+              setTimeout(() => {
+                carousel.style.transition = 'none';
+                currentIndex = 1;
+                carousel.style.transform = `translateX(-100%)`;
+              }, 500);
+            }
+          }, 3000);
+        }
+
+        sections.forEach((section, index) => {
+          section.addEventListener('click', () => {
+            clearInterval(interval);
+            currentIndex = index + 1;
+            updateCarousel(currentIndex);
+            startAutoSlide();
+          });
+        });
+
+        updateCarousel(currentIndex);
+        startAutoSlide();
+      });
+    </script>
+  </body>
+</html>
