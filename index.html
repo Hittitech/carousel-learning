@@ -94,136 +94,143 @@
     </style> -->
 
     <style>
-          body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffffff;
-          }
-          .carousel-parent {
-            width: 100%;
-            height: 60vh;
-            margin-bottom: 20px;
-            background: url(images/bg-img.jpg) center/cover no-repeat;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-          }
-          .carousel-container {
-            width: 100%;
-            min-width: 100%;
-            max-width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
+              body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #ffffff;
+              }
+              .carousel-parent {
+                width: 100%;
+                height: 60vh;
+                margin-bottom: 20px;
+                background: url(images/bg-img.jpg) center/cover no-repeat;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+              }
+              .carousel-container {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
 
-          }
-          .carousel {
-            display: flex;
-            width: 100%;
-            transition: transform 0.5s ease-in-out;
+              }
+              .carousel {
+                display: flex;
+                width: 100%;
+                transition: transform 0.5s ease-in-out;
 
-          }
+              }
 
-          .carousel-item {
-            display: flex;
-            min-width: 100%;
-            text-align: left;
+              .carousel-item {
+                display: flex;
+                min-width: 100%;
+                text-align: left;
 
-          }
-          .carousel-text {
-            flex: 60%;
-            padding: 60px 60px 60px 90px;
-            text-wrap: wrap;
-          }
-          .carousel-text h1 {
-            margin-top: 0;
-            color: rgb(255, 85, 12);
+              }
+              .carousel-text {
+                flex: 60%;
+                padding: 60px 60px 60px 90px;
+                text-wrap: wrap;
+              }
+              .carousel-text h1 {
+                margin-top: 0;
+                color: rgb(255, 85, 12);
 
-          }
-          .carousel-image {
-            flex: 40%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-bottom: 20px;
-          }
-          .carousel-image img {
-            max-width: 70%;
-            max-height: 70%;
-          }
-          .sections {
-            display: flex;
-            width: 90%;
-            justify-content: space-between;
-          }
-          .section {
-            width: 23%;
-            text-align: center;
-            cursor: pointer;
-          }
-          .loader {
-            width: 100%;
-            height: 5px;
-            background: #ddd;
-            overflow: hidden;
-            position: relative;
-            margin-top: 10px;
-            border-radius: 2.5px;
-          }
-          .loader::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0;
-            /* background: #ffffff; */
-            transition: width 3s linear;
-          }
-          .active .loader::before {
-            width: 100%;
-            background: #800080;
-          }
-          .section-text.active {
-            color: blue;
-            font-weight: bold;
-            transition: color 0.5s, font-weight 0.5s;
-          }
-          @media only screen and (max-width: 768px) {
-        .carousel-parent {
-          min-height: screen; /* Increase height to fit the entire screen */
-        }
-        .carousel {
-          /* Display carousel items in a column */
-        }
-        .carousel-item {
-            display: flex;
-            flex-direction: column;
-          /* min-height: calc(100vh - 120px); */
-           /* Adjust height to fit text and image */
-        }
-        .carousel-text {
-          padding: 20px; /* Reduce padding for smaller screens */
-        }
-        .carousel-image {
-          padding-bottom: 10px; /* Reduce padding for smaller screens */
-        }
-        .sections {
-          flex-direction: column;
-          align-items: center;
-          margin-top: 20px; /* Add margin to separate sections */
-        }
-        .section {
-          width: 90%; /* Take up almost the entire width */
-          margin-top: 20px; /* Add margin to separate sections */
-        }
+              }
+              .carousel-image {
+                flex: 40%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-bottom: 20px;
+              }
+              .carousel-image img {
+                max-width: 70%;
+                max-height: 70%;
+              }
+              .sections {
+                display: flex;
+                width: 90%;
+                justify-content: space-between;
+              }
+              .section {
+                width: 23%;
+                text-align: center;
+                cursor: pointer;
+              }
+              .loader {
+                width: 100%;
+                height: 5px;
+                background: #ddd;
+                overflow: hidden;
+                position: relative;
+                margin-top: 10px;
+                border-radius: 2.5px;
+              }
+              .loader::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0;
+                /* background: #ffffff; */
+                transition: width 3s linear;
+              }
+              .active .loader::before {
+                width: 100%;
+                background: #800080;
+              }
+              .section-text.active {
+                color: blue;
+                font-weight: bold;
+                transition: color 0.5s, font-weight 0.5s;
+              }
+           @media only screen and (max-width: 768px) {
+            .carousel-parent {
+              min-height: screen; /* Increase height to fit the entire screen */
+            }
+            .carousel {
+              /* Display carousel items in a column */
+            }
+            .carousel-item {
+                display: flex;
+                flex-direction: column;
+              /* min-height: calc(100vh - 120px); */
+               /* Adjust height to fit text and image */
+            }
+            .carousel-text {
+              padding: 20px; /* Reduce padding for smaller screens */
+            }
+            .carousel-image {
+              padding-bottom: 10px; /* Reduce padding for smaller screens */
+            }
+            .sections {
+                display: flex;
+                width: 90%;
+                justify-content: center;
+              }
+              .section {
+                width: 23%;
+                text-align: center;
+                cursor: pointer;
+                display: none;
+              }
+
+      .section.active {
+        display: block; /* Show active section */
+        /* visibility: visible; Make active section visible */
       }
+          }
     </style>
   </head>
   <body>
@@ -408,7 +415,7 @@
             const sectionTexts = section.querySelectorAll('.section-text');
             if (i === (index - 1) % (items.length - 2)) {
               section.classList.add('active');
-              sectionTexts.forEach(text => text.classList.add('active'));
+               sectionTexts.forEach(text => text.classList.add('active'));
             } else {
               section.classList.remove('active');
               sectionTexts.forEach(text => text.classList.remove('active'));
